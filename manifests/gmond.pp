@@ -22,6 +22,7 @@ class ganglia::gmond (
   $gmond_service_config           = $::ganglia::params::gmond_service_config,
   $gmond_status_command           = $::ganglia::params::gmond_status_command,
   $ensure_service                 = 'running',
+  $enable_service                 = true,
 ) inherits ganglia::params {
   validate_string($globals_deaf)
   validate_string($globals_host_dmax)
@@ -73,7 +74,7 @@ class ganglia::gmond (
     ensure     => $ensure_service,
     hasstatus  => $hasstatus,
     hasrestart => true,
-    enable     => true,
+    enable     => $enable_service,
     status     => $gmond_status_command,
   }
 }
